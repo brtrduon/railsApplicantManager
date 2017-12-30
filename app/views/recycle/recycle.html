@@ -1,0 +1,44 @@
+<%= stylesheet_link_tag "employees.css" %>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <ul>
+                <li><a href='/sessions/<%= @current_user.id %>'>(Logout)</a></li>
+                <li class='user'><%= current_user.first_name %></li>
+                <li>|</li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
+        <div class='body'>
+            <h1>Recycle Bin</h1>
+            <h3>(but not quite deleted yet)</h3>
+            <hr>
+            <table>
+                <tr>
+                    <th>First Name | </th>
+                    <th>Last Name | </th>
+                    <th>Email | </th>
+                    <th>City | </th>
+                    <th>Job Position | </th>
+                    <th>Can Start On | </th>
+                    <th>Added By</th>
+                    <th>Action</th>
+                </tr>
+                <% @recycle.each do |i| %>
+                <tr>
+                    <td><%= i.first_name %></td>
+                    <td><%= i.last_name %></td>
+                    <td><%= i.email %></td>
+                    <td><%= i.city %></td>
+                    <td><%= i.job_position %></td>
+                    <td><%= i.can_start %></td>
+                    <td><%= i.user.first_name %> <%= i.user.last_name %></td>
+                <% end %>
+                </tr>
+            </table>
+            <hr>
+            <a href='/home'>Go back</a>
+        </div>
+    </div>
+</body>

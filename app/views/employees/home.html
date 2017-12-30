@@ -1,0 +1,77 @@
+<%= stylesheet_link_tag "employees.css" %>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <ul>
+                <li><a href='/sessions/<%= @current_user.id %>'>(Logout)</a></li>
+                <li class='user'><%= current_user.first_name %></li>
+                <li>|</li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
+        <div class='body'>
+            <h3>Welcome, <%= @current_user.first_name %></h3>
+            <h1>Dashboard</h1>
+            <hr>
+            <table>
+                <h3>Applicants</h3>
+                <% if @employees.count == 0 %>
+                    <p>We do not have any applicants at this time. So sad today man.</p>
+                <% else %>
+                    <tr>
+                        <th>First Name | </th>
+                        <th>Last Name | </th>
+                        <th>Email | </th>
+                        <th>City | </th>
+                        <th>Job Position | </th>
+                        <th>Can Start On | </th>
+                        <th>Added By | </th>
+                        <th>Action</th>
+                    </tr>
+                <% end %>
+                <% @employees.each do |i| %>
+                <tr>
+                    <td><%= i.first_name %></td>
+                    <td><%= i.last_name %></td>
+                    <td><%= i.email %></td>
+                    <td><%= i.city %></td>
+                    <td><%= i.job_position %></td>
+                    <td><%= i.can_start %></td>
+                    <td><%= i.user.first_name %> <%= i.user.last_name %></td>
+                    <% if i.user.first_name == @current_user.first_name %>
+                        <td><a href='/edit/<%= i.id %>'><button>Edit</button></a></td>
+                        <td><a href='/delete/<%= i.id %>'><button>Delete</button></a></td>
+                        <td>
+                            <form action='/recycle/<%= i.id %>' method='post'>
+                                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                <input type='hidden' name='employee[first_name]' value='<%= i.first_name %>'>
+                                <input type='hidden' name='employee[last_name]' value='<%= i.last_name %>'>
+                                <input type='hidden' name='employee[email]' value='<%= i.email %>'>
+                                <input type='hidden' name='employee[job_position]' value='<%= i.job_position %>'>
+                                <input type='hidden' name='employee[city]' value='<%= i.city %>'>
+                                <input type='hidden' name='employee[can_start]' value='<%= i.can_start %>'>
+                                <input type='submit' value='Make Applicant Lower Priority'>
+                            </form>
+                        </td>
+                    <% else %>
+                        <td><a href='<%= i.id %>'>View Profile</a></td>
+                    <% end %>
+                <% end %>
+                </tr>
+            </table>
+            <hr>
+            <a href='/recyclebin'>View Lower Priority Applicants</a>
+            <br><br>
+            <a href='/add'>Add a potential employee</a>
+            <br>
+            <% if flash[:errors] %>
+                <ul>
+                    <% flash[:errors].each do |i| %>
+                        <li><%= i %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+</body>

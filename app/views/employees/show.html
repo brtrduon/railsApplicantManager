@@ -1,0 +1,26 @@
+<%= stylesheet_link_tag "employees.css" %>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <ul>
+                <li><a href='/sessions/<%= @current_user.id %>'>(Logout)</a></li>
+                <li class='user'><%= current_user.first_name %></li>
+                <li>|</li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
+        <div class='body'>
+            <h1>Displaying Applicant Info</h1>
+            <hr>
+            <h3><%= @employee.first_name %> <%= @employee.last_name %></h3>
+            <p>Email: <%= @employee.email %></p>
+            <p>City: <%= @employee.city %></p>
+            <p>Job Position: <%= @employee.job_position %></p>
+            <p>Can Start On: <%= @employee.can_start %></p>
+            <p>Added by: <%= @employee.user.first_name %> <%= @employee.user.last_name %></p>
+            <hr>
+            <a href='/home'>Go back</a>
+        </div>
+    </div>
+</body>

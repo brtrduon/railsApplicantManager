@@ -1,0 +1,52 @@
+<%= stylesheet_link_tag "employees.css" %>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <ul>
+                <li><a href='/sessions/<%= @current_user.id %>'>(Logout)</a></li>
+                <li class='user'><%= current_user.first_name %></li>
+                <li>|</li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
+        <div class='body'>
+            <h1>Edit applicant</h1>
+            <hr><br>
+            <form action='/edit/<%= @employee.id %>' method='post'>
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <label>First Name:</label>
+                <input type='text' name='employee[first_name]' value='<%= @employee.first_name %>'>
+                <br><br>
+                <label>Last Name:</label>
+                <input type='text' name='employee[last_name]' value='<%= @employee.last_name %>'>
+                <br><br>
+                <label>Email:</label>
+                <input type='text' name='employee[email]' value='<%= @employee.email %>'>
+                <br><br>
+                <label>Job Position:</label>
+                <input type='text' name='employee[job_position]' value='<%= @employee.job_position %>'>
+                <br><br>
+                <label>City:</label>
+                <input type='text' name='employee[city]' value='<%= @employee.city %>'>
+                <br><br>
+                <label>Can start on:</label>
+                <input type='date' name='employee[can_start]' value='<%= @employee.can_start %>'>
+                <br><br>
+                <input type='submit' value='Update Applicant'>
+            </form>
+            <br>
+            <hr>
+            <br>
+            <a href='/home'>Go back</a>
+            <br>
+            <% if flash[:errors] %>
+                <ul>
+                    <% flash[:errors].each do |i| %>
+                        <li><%= i %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+</body>
