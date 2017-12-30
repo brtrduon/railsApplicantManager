@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag "employees.css" %>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <ul>
+                <li><a href='/sessions/<%= @current_user.id %>'>(Logout)</a></li>
+                <li class='user'><%= current_user.first_name %></li>
+                <li>|</li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
+        <div class='body'>
+            <h1>Displaying Recycled Applicant Info</h1>
+            <hr>
+            <h3><%= @recycle.first_name %> <%= @recycle.last_name %></h3>
+            <p>Email: <%= @recycle.email %></p>
+            <p>City: <%= @recycle.city %></p>
+            <p>Job Position: <%= @recycle.job_position %></p>
+            <p>Can Start On: <%= @recycle.can_start %></p>
+            <p>Added by: <%= @recycle.user.first_name %> <%= @recycle.user.last_name %></p>
+            <% unless @recycle.user.scolds.include?(@current_user) %>
+                <form action='/home/recycle/<%= @recycle.id %>/scold' method='post'>
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <input type="hidden" name="scold[recycle_id]" value="<%= @recycle.id %>">
+                    <input type='submit' value='Scold <%= @recycle.user.first_name %>'>
+                </form>
+            <% else %>
+                <h5>[You have scolded <%= @recycle.user.first_name %>]</h5>
+            <% end %>
+            <hr>
+            <a href='/home/recycle'>Back to Recycle bin</a>
+        </div>
+    </div>
+</body>

@@ -17,7 +17,7 @@
             <table>
                 <h3>Applicants</h3>
                 <% if @employees.count == 0 %>
-                    <p>We do not have any applicants at this time. So sad today man.</p>
+                    <p>We do not have any (active) applicants at this time. So sad today man.</p>
                 <% else %>
                     <tr>
                         <th>First Name | </th>
@@ -39,7 +39,7 @@
                     <td><%= i.job_position %></td>
                     <td><%= i.can_start %></td>
                     <td><%= i.user.first_name %> <%= i.user.last_name %></td>
-                    <% if i.user.first_name == @current_user.first_name %>
+                    <% if i.user.id == @current_user.id %>
                         <td><a href='/edit/<%= i.id %>'><button>Edit</button></a></td>
                         <td><a href='/delete/<%= i.id %>'><button>Delete</button></a></td>
                         <td>
@@ -55,13 +55,13 @@
                             </form>
                         </td>
                     <% else %>
-                        <td><a href='<%= i.id %>'>View Profile</a></td>
+                        <td><a href='/<%= i.id %>'>View Profile</a></td>
                     <% end %>
                 <% end %>
                 </tr>
             </table>
             <hr>
-            <a href='/recyclebin'>View Lower Priority Applicants</a>
+            <a href='/home/recycle'>View Lower Priority Applicants</a>
             <br><br>
             <a href='/add'>Add a potential employee</a>
             <br>

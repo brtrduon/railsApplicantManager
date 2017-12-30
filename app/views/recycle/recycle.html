@@ -15,6 +15,9 @@
             <h3>(but not quite deleted yet)</h3>
             <hr>
             <table>
+                <% if @recycle.count == 0 %>
+                    <p>No applicants in recycle bin. Yay!</p>
+                <% else %>
                 <tr>
                     <th>First Name | </th>
                     <th>Last Name | </th>
@@ -25,6 +28,7 @@
                     <th>Added By</th>
                     <th>Action</th>
                 </tr>
+                <% end %>
                 <% @recycle.each do |i| %>
                 <tr>
                     <td><%= i.first_name %></td>
@@ -34,11 +38,28 @@
                     <td><%= i.job_position %></td>
                     <td><%= i.can_start %></td>
                     <td><%= i.user.first_name %> <%= i.user.last_name %></td>
+                    <% if i.user.id == @current_user.id %>
+                        <td><a href='/home/recycle/delete/<%= i.id %>'><button>Delete</button></a></td>
+                        <td>
+                            <form action='/home/recycle/<%= i.id %>' method='post'>
+                                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                                <input type='hidden' name='recycle[first_name]' value='<%= i.first_name %>'>
+                                <input type='hidden' name='recycle[last_name]' value='<%= i.last_name %>'>
+                                <input type='hidden' name='recycle[email]' value='<%= i.email %>'>
+                                <input type='hidden' name='recycle[job_position]' value='<%= i.job_position %>'>
+                                <input type='hidden' name='recycle[city]' value='<%= i.city %>'>
+                                <input type='hidden' name='recycle[can_start]' value='<%= i.can_start %>'>
+                                <input type='submit' value='Restore'>
+                            </form>
+                        </td>
+                    <% else %>
+                        <td><a href='/home/recycle/<%= i.id %>'>View Profile</a></td>
+                    <% end %>
                 <% end %>
                 </tr>
             </table>
             <hr>
-            <a href='/home'>Go back</a>
+            <a href='/home'>Back to Home</a>
         </div>
     </div>
 </body>

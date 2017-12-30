@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :employees
   has_many :recycles
+  has_many :scolds, dependent: :destroy
+  has_many :scoldings, through: :scolds, source: :recycle
   validates :first_name, :last_name, presence: true
   validates :password, length: {minimum: 8}, on: :create
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }

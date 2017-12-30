@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
     def home
         @current_user = current_user
-        @employees = Employee.all
+        @employees = Employee.all.order(can_start: :asc)
     end
 
     def add

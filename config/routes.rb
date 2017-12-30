@@ -23,7 +23,17 @@ Rails.application.routes.draw do
 
   post 'recycle/:id' => 'employees#recycle'
 
-  get 'recyclebin' => 'recycle#recycle'
+  get 'home/recycle' => 'recycle#recycle'
+
+  get 'home/recycle/delete/:id' => 'recycle#delete'
+
+  post 'home/recycle/:id' => 'recycle#restore'
+
+  post 'home/recycle/delete/:id' => 'recycle#destroy'
+
+  get 'home/recycle/:id' => 'recycle#show'
+
+  post 'home/recycle/:id/scold' => 'scolds#create'
 
 
 
