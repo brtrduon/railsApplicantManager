@@ -4,6 +4,10 @@ class ScoldsController < ApplicationController
         redirect_to :back
     end
 
+    def remove
+        
+    end
+
 
     private
     def scold_params

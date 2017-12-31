@@ -2,6 +2,7 @@ class EmployeesController < ApplicationController
     def home
         @current_user = current_user
         @employees = Employee.all.order(can_start: :asc)
+        # if @current_user.scoldings
     end
 
     def add

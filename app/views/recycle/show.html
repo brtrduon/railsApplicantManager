@@ -19,7 +19,7 @@
             <p>Job Position: <%= @recycle.job_position %></p>
             <p>Can Start On: <%= @recycle.can_start %></p>
             <p>Added by: <%= @recycle.user.first_name %> <%= @recycle.user.last_name %></p>
-            <% unless @recycle.user.scolds.include?(@current_user) %>
+            <% if !@recycle.users.find_by(id: @current_user.id) %>
                 <form action='/home/recycle/<%= @recycle.id %>/scold' method='post'>
                     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
                     <input type="hidden" name="scold[recycle_id]" value="<%= @recycle.id %>">
