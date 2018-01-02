@@ -1,0 +1,49 @@
+<%= stylesheet_link_tag "employees.css" %>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <ul>
+                <li><a href='/sessions/<%= @current_user.id %>'>(Logout)</a></li>
+                <li class='user'><%= current_user.first_name %></li>
+                <li>|</li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
+        <div class='body'>
+            <h1>Edit Hired Applicant</h1>
+            <hr><br>
+            <form action='/hire/edit/<%= @hire.id %>' method='post'>
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <label>First Name:</label>
+                <input type='text' name='hire[first_name]' value='<%= @hire.first_name %>'>
+                <br><br>
+                <label>Last Name:</label>
+                <input type='text' name='hire[last_name]' value='<%= @hire.last_name %>'>
+                <br><br>
+                <label>Email:</label>
+                <input type='text' name='hire[email]' value='<%= @hire.email %>'>
+                <br><br>
+                <label>Job Position:</label>
+                <input type='text' name='hire[job_position]' value='<%= @hire.job_position %>'>
+                <br><br>
+                <label>City:</label>
+                <input type='text' name='hire[city]' value='<%= @hire.city %>'>
+                <br><br>
+                <input type='submit' value='Update Hired Applicant'>
+            </form>
+            <br>
+            <hr>
+            <br>
+            <a href='/home'>Go back</a>
+            <br>
+            <% if flash[:errors] %>
+                <ul>
+                    <% flash[:errors].each do |i| %>
+                        <li><%= i %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
+</body>

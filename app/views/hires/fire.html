@@ -1,0 +1,25 @@
+<%= stylesheet_link_tag "employees.css" %>
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <ul>
+                <li><a href='/sessions/<%= @current_user.id %>'>(Logout)</a></li>
+                <li class='user'><%= current_user.first_name %></li>
+                <li>|</li>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
+        <div class='body'>
+            <div class='delete'>
+                <p>Are you sure you want to release <%= @hire.first_name %> <%= @hire.last_name %>?</p>
+                <a href='/home'><button>No</button></a>
+                <br><br>
+                <form class='yes' action='/hire/fire/<%= @hire.id %>' method='post'>
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <input type='submit' value='Yes, breh'>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

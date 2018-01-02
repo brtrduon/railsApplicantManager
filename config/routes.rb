@@ -41,7 +41,13 @@ Rails.application.routes.draw do
 
   get 'hire/:id' => 'hires#show'
 
-  get 'hire/edit/:id' => 'hire#edit'
+  get 'hire/edit/:id' => 'hires#edit'
+
+  post 'hire/edit/:id' => 'hires#update'
+
+  get 'hire/fire/:id' => 'hires#fire'
+
+  post 'hire/fire/:id' => 'hires#destroy'
 
 
 

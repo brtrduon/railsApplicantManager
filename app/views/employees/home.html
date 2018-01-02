@@ -22,8 +22,8 @@
                             <input type='submit' value='OK'>
                         </form>
                         <% end %>
-                        <p>---</p>
                         <br>
+                        <p>---</p>
                     <% end %>
                 <% end %>
             <% end %>
@@ -90,6 +90,7 @@
             <hr>
             <table>
                 <h3>Hired Applicants</h3>
+                <% if @hire.count > 0 %>
                 <tr>
                     <th>First Name | </th>
                     <th>Last Name | </th>
@@ -115,6 +116,9 @@
                     <% end %>
                 <% end %>
                 </tr>
+                <% else %>
+                    <p>No hired applicants at this time. So sad today man :(</p>
+                <% end %>
             </table>
             <hr>
             <a href='/home/recycle'>View Lower Priority Applicants</a>

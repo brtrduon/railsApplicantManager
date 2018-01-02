@@ -38,6 +38,10 @@
     border-color: gray;
     border-radius: 5px;
 }
+.scoldimg {
+    height: 35%;
+    width: 30%;
+}
 .body {
     height: 100%;
     background-color: white;
