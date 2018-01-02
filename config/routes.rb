@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   post 'home/recycle/:id/scold' => 'scolds#create'
 
+  post 'home/recycle/:id/delete' => 'scolds#delete'
+
 
 
   get 'sessions/:id' => 'sessions#destroy'

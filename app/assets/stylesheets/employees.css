@@ -47,6 +47,11 @@
     top: 42px;
     left: 300px;
 }
+.scolders {
+    font-family: monospace;
+    color: red;
+    font-size: 26px;
+}
 .delete {
     width: 600px;
     border-style: solid;

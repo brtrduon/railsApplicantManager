@@ -4,8 +4,10 @@ class ScoldsController < ApplicationController
         redirect_to :back
     end
 
-    def remove
-        
+    def delete
+        @scold = Scold.find_by(id: params[:id])
+        @scold.delete
+        redirect_to '/home'
     end
 
 

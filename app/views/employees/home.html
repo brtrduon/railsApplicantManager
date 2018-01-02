@@ -11,13 +11,29 @@
         </div>
         <img class='backgroundimg' src='/assets/img1.jpg' alt='img1.jpg'>
         <div class='body'>
+            <% @recycle.each do |j| %>
+                <% if j.user.id == @current_user.id %>
+                    <% j.users.each do |k| %>
+                        <h3 class='scolders'><%= k.first_name %> scolded you</h3>
+                        <% k.scolds.each do |l| %>
+                        <form action='/home/recycle/<%= l.id %>/delete' method='post'>
+                            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                            <input type='hidden' name='<%= l.id %>'>
+                            <input type='submit' value='OK'>
+                        </form>
+                        <% end %>
+                        <p>---</p>
+                        <br>
+                    <% end %>
+                <% end %>
+            <% end %>
             <h3>Welcome, <%= @current_user.first_name %></h3>
             <h1>Dashboard</h1>
             <hr>
             <table>
                 <h3>Applicants</h3>
                 <% if @employees.count == 0 %>
-                    <p>We do not have any (active) applicants at this time. So sad today man.</p>
+                    <p>No (active) applicants at this time. So sad today man.</p>
                 <% else %>
                     <tr>
                         <th>First Name | </th>
@@ -60,6 +76,7 @@
                 <% end %>
                 </tr>
             </table>
+            
             <hr>
             <a href='/home/recycle'>View Lower Priority Applicants</a>
             <br><br>
