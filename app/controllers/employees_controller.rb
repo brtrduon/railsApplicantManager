@@ -3,6 +3,7 @@ class EmployeesController < ApplicationController
         @current_user = current_user
         @employees = Employee.all.order(can_start: :asc)
         @recycle = Recycle.all.order(can_start: :asc)
+        @hire = Hire.all.order(updated_at: :asc)
     end
 
     def add

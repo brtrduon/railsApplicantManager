@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :employees
   has_many :recycles
+  has_many :hires
   has_many :scolds, dependent: :destroy
   has_many :scoldings, through: :scolds, source: :recycle
   validates :first_name, :last_name, presence: true

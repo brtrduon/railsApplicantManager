@@ -34,8 +34,14 @@ Rails.application.routes.draw do
   get 'home/recycle/:id' => 'recycle#show'
 
   post 'home/recycle/:id/scold' => 'scolds#create'
-
+  
   post 'home/recycle/:id/delete' => 'scolds#delete'
+  
+  post 'hire/:id' => 'hires#create'
+
+  get 'hire/:id' => 'hires#show'
+
+  get 'hire/edit/:id' => 'hire#edit'
 
 
 
